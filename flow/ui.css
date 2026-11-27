@@ -1,0 +1,45 @@
+:root{--bg:#F6F3EA;--ink:#0E2A20;--muted:#5F7168;--deep:#08291F;--green:#174D37;--em:#22C55E;--cream:#F6F3EA;--card:#ffffffcc;--line:#e1e7da;--r:26px;color-scheme:light}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{color:var(--ink);font:400 16px/1.5 Inter,system-ui,sans-serif;background:var(--bg);position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 85% -10%,#22c55e2e,transparent 45%),radial-gradient(circle at 0 100%,#17604524,transparent 40%),radial-gradient(#0e2a2022 1.1px,transparent 1.2px) 0 0/26px 26px}
+h1,h2,h3,.hd2{font-family:Sora,Inter,sans-serif;letter-spacing:-.035em;line-height:1.08}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--em);outline-offset:2px;border-radius:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;background:var(--deep);color:#fff;border:1.5px solid var(--deep);border-radius:99px;padding:13px 24px;font-weight:600;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px #08291f33}
+.btn.o{background:#ffffff80;color:var(--ink);border-color:#0e2a2033}
+.btn.em{background:var(--em);border-color:var(--em);color:#04170f}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* connected puzzle */
+.pzs{position:relative;aspect-ratio:1000/470;container-type:inline-size;width:100%}
+.pz{position:absolute;width:28%;aspect-ratio:320/170;padding:0;border:0;background:none;text-align:left;transition:transform .2s}
+.pz:hover{transform:translateY(-5px)}
+.pz svg.sh{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 12px 18px #08291f26)}
+.pz svg.sh path{fill:#fff;stroke:#22c55e88;stroke-width:1.6}
+.pz.off svg.sh path{stroke:#9aa9a0;stroke-dasharray:5 5;fill:#ffffffb0}
+.pz .tx{position:absolute;left:14%;right:11%;top:0;bottom:0;display:flex;align-items:center;gap:1.6cqw}
+.pz .tx>svg{width:max(34px,4.6cqw);height:max(34px,4.6cqw);flex:none}
+.pz b{display:block;font:700 max(14px,2.1cqw)/1.1 Sora,sans-serif;letter-spacing:-.02em}
+.pz small{display:block;font-size:max(11px,1.45cqw);color:var(--muted);margin-top:.4cqw}
+.hub{position:absolute;left:38.5%;top:25.5%;width:23%;aspect-ratio:1}
+.hub svg.sh{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 18px 28px #08291f55)}
+.hub svg.sh path{fill:#0c3a2b;stroke:#22c55e;stroke-opacity:.55;stroke-width:2}
+.hub .hc{position:absolute;left:13%;right:13%;top:13%;bottom:13%;display:grid;place-items:center;align-content:center;color:#fff;text-align:center}
+.hub .hc svg{width:34%;color:var(--em);filter:drop-shadow(0 0 12px #22c55e)}
+.hub .hc b{font:700 max(13px,1.9cqw) Sora;margin-top:6%}.hub .hc small{font-size:max(10px,1.2cqw);opacity:.65}
+.hub::before{content:"";position:absolute;inset:8%;border-radius:50%;box-shadow:0 0 0 0 #22c55e66;animation:pls 2.8s infinite}
+@keyframes pls{70%{box-shadow:0 0 0 38px #22c55e00}100%{box-shadow:0 0 0 0 #22c55e00}}
+.net{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.net .ln{fill:none;stroke:#22c55e;stroke-opacity:.55;stroke-width:2;stroke-dasharray:2 7;stroke-linecap:round}
+.net .ln.off{stroke:#8b9a91;stroke-opacity:.6}
+.net .mv{fill:#22c55e;filter:drop-shadow(0 0 5px #22c55e)}
+.net .nd{fill:#22c55e;stroke:#fff;stroke-width:2.5;filter:drop-shadow(0 0 6px #22c55e)}.net .nd.off{fill:#9aa9a0;filter:none}
+.okp{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:#fffc;border:1px solid #fff;border-radius:99px;padding:9px 20px;font-weight:600;font-size:max(12px,1.5cqw);box-shadow:0 8px 24px #08291f14;white-space:nowrap}
+.okp i{width:10px;height:10px;border-radius:50%;background:var(--em);box-shadow:0 0 0 4px #22c55e30}
+@media (max-width:760px){
+.pzs{aspect-ratio:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}.net,.hub,.pz svg.sh{display:none}
+.pz{position:static;width:auto;aspect-ratio:auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px}.pz .tx{position:static}.pz .tx>svg{width:34px;height:34px}.pz b{font-size:16px}.pz small{font-size:13px}
+.okp{position:static;transform:none;grid-column:1/-1;justify-self:center;font-size:13px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.net .mv{display:none}}

@@ -4,204 +4,87 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aveniq Flow – Your AI Business Assistant</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Aveniq Flow connects your tasks, appointments, customers, and apps into one workspace.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui.css">
 <style>
-:root{--bg:#F8F5EC;--surface:#fff;--ink:#102D23;--muted:#68776F;--deep:#092F24;--green:#174D37;--em:#22C55E;--line:#d9e2d6;--on-deep:#F8F5EC;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07241b;--surface:#0f3326;--ink:#F8F5EC;--muted:#9fb3a8;--deep:#04170f;--green:#22C55E;--line:#1d4a39;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#07241b;--surface:#0f3326;--ink:#F8F5EC;--muted:#9fb3a8;--deep:#04170f;--green:#22C55E;--line:#1d4a39;color-scheme:dark}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg);color:var(--ink);font:400 17px/1.55 Figtree,system-ui,sans-serif}
-h1,h2,h3,.brand{font-family:'Bricolage Grotesque',Figtree,sans-serif;letter-spacing:-.025em;line-height:1.05}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:3px solid var(--em);outline-offset:3px;border-radius:8px}
-.wrap{max-width:1120px;margin:auto;padding:0 22px}
-nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;gap:8px;align-items:center;font-weight:800;font-size:26px}
-.links{display:flex;gap:26px;font-weight:500;font-size:15px}
-.btn{display:inline-flex;gap:8px;align-items:center;padding:14px 24px;border-radius:99px;font-weight:600;border:1.5px solid var(--ink);background:none;color:var(--ink);cursor:pointer;font-size:16px;font-family:inherit}
-.btn.fill{background:var(--deep);color:var(--on-deep);border-color:var(--deep)}
-.btn.sm{padding:10px 18px;font-size:15px}
-@media (prefers-color-scheme:dark){.btn.fill{background:var(--em);color:#04170f;border-color:var(--em)}}
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:center;padding:56px 0 70px}
-.pill{display:inline-flex;gap:8px;align-items:center;background:color-mix(in srgb,var(--em) 14%,var(--bg));border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:500;margin-bottom:22px}
-.pill i{width:9px;height:9px;border-radius:50%;background:var(--em)}
-h1{font-size:clamp(48px,8vw,92px);font-weight:800}
-h1 b{color:var(--green)}
-.lede{font-size:21px;color:var(--muted);max-width:30em;margin:22px 0 30px}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+nav{position:sticky;top:14px;z-index:10;margin:14px auto 0;max-width:1132px;display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 22px;border-radius:99px;background:#ffffffb8;backdrop-filter:blur(14px);border:1px solid #fff;box-shadow:0 10px 30px #08291f14}
+.brand{display:flex;gap:9px;align-items:center;font:700 22px Sora}.brand svg{width:26px;height:26px;color:var(--green)}
+.links{display:flex;gap:28px;font-weight:500;font-size:15px;color:var(--muted)}.links a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:.78fr 1.22fr;gap:10px;align-items:center;padding:64px 0 40px}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:#fffa;border-radius:99px;padding:6px 14px;font-size:14px;font-weight:500;margin-bottom:22px}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--em);box-shadow:0 0 0 4px #22c55e30}
+h1{font-size:clamp(46px,6.2vw,86px);font-weight:800}h1 em{font-style:normal;color:var(--green);background:linear-gradient(transparent 70%,#22c55e44 0)}
+.lede{font-size:20px;color:var(--muted);max-width:30em;margin:24px 0 32px}
 .row{display:flex;gap:12px;flex-wrap:wrap}
-.avo-stage{position:relative;display:grid;place-items:center}
-.avo-stage::before{content:"";position:absolute;inset:6% 0 0;border-radius:50% 50% 46% 54%;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--em) 28%,transparent),transparent 70%)}
-.avo{width:min(100%,360px);position:relative;animation:float 5s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-12px)}}
-.bubble{position:absolute;top:2%;right:0;background:var(--surface);border-radius:20px;padding:10px 16px;font-weight:500;box-shadow:0 8px 24px #0a2a2014;font-size:15px}
-section{padding:70px 0}
-h2{font-size:clamp(34px,5vw,56px);font-weight:800;max-width:15em}
-.sub{color:var(--muted);max-width:36em;margin-top:14px}
-.demo{background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:28px;margin-top:34px;box-shadow:0 20px 50px #0a2a2012}
-.demo-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
-.tag{font-size:13px;font-weight:600;background:color-mix(in srgb,var(--em) 18%,transparent);border-radius:99px;padding:4px 12px}
-.puzzle{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;gap:14px 0;align-items:center}
-.piece{position:relative;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:22px;padding:16px 18px;cursor:pointer;color:var(--ink);font:inherit;transition:border-color .2s,background .2s}
-.piece strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:19px}
-.piece small{color:var(--muted);font-size:14px}
-.piece .dot{position:absolute;top:14px;right:14px;width:10px;height:10px;border-radius:50%;background:var(--em);box-shadow:0 0 0 5px color-mix(in srgb,var(--em) 25%,transparent)}
-.piece.off{border-style:dashed;opacity:.65}.piece.off .dot{background:var(--muted);box-shadow:none}
-.piece.sel{border-color:var(--em);background:color-mix(in srgb,var(--em) 10%,var(--bg))}
-.col{display:grid;gap:14px}
-.col.l .piece::after,.col.r .piece::after{content:"";position:absolute;top:50%;height:3px;width:28px;background:var(--em);border-radius:3px}
-.col.l .piece::after{right:-29px}.col.r .piece::after{left:-29px}
-.col .piece.off::after{background:repeating-linear-gradient(90deg,var(--muted) 0 4px,transparent 4px 8px)}
-.col.l{padding-right:30px}.col.r{padding-left:30px}
-.center{display:grid;place-items:center;padding:10px}
-.center svg{width:min(100%,190px);animation:float 5s ease-in-out infinite}
-.panel{margin-top:22px;border-radius:20px;background:var(--deep);color:var(--on-deep);padding:20px 24px;display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
-.panel p{max-width:40em;font-size:16px}
-.panel .btn{border-color:var(--on-deep);color:var(--on-deep)}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:26px}
-.card:nth-child(2){border-radius:26px 26px 26px 6px}
-.card h3{font-size:24px;margin-bottom:8px}.card p{color:var(--muted);font-size:16px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;counter-reset:s}
-.steps li{list-style:none;counter-increment:s;padding-top:18px;border-top:3px solid var(--em);font-size:19px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700}
-.steps li::before{content:counter(s) ". "}
-.steps span{display:block;font:400 16px/1.5 Figtree,sans-serif;color:var(--muted);margin-top:6px}
-.tiers .card b{font-family:'Bricolage Grotesque',sans-serif;font-size:26px}
-.tiers ul{padding-left:18px;margin-top:12px;color:var(--muted);font-size:16px}
-.note{font-size:14px;color:var(--muted);margin-top:16px}
-.cta{background:var(--deep);color:var(--on-deep);border-radius:36px;padding:64px 28px;text-align:center;margin:30px 0 60px}
-.cta h2{margin:0 auto 26px;color:var(--on-deep)}
-.cta .btn.fill{background:var(--em);border-color:var(--em);color:#04170f}
-footer{padding:0 0 40px;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media (max-width:820px){
-.links{display:none}.hero{grid-template-columns:1fr;padding-top:30px}.avo-stage{order:-1;max-width:300px;margin:auto}
-.grid3,.steps{grid-template-columns:1fr}
-.puzzle{grid-template-columns:1fr}.center{order:-1}.col.l,.col.r{padding:0}.col .piece::after{display:none}
-.demo{padding:18px;border-radius:26px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+section{padding:80px 0}
+.k{font:600 13px Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+h2{font-size:clamp(32px,4.4vw,56px);font-weight:700;max-width:16em}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:44px}
+.tile{background:var(--card);border:1px solid #fff;border-radius:var(--r);padding:28px;box-shadow:0 14px 34px #08291f10;backdrop-filter:blur(10px)}
+.tile h3{font-size:24px;margin-bottom:8px}.tile p{color:var(--muted)}
+.t1{grid-column:span 4;background:linear-gradient(150deg,#0f4a37,#08291f);color:#fff}.t1 p{color:#cfe5d8}
+.t2{grid-column:span 2}.t3,.t4,.t5{grid-column:span 2}.t6{grid-column:span 6;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.chat{margin-top:22px;display:grid;gap:10px;font-size:15px}.chat div{padding:11px 16px;border-radius:18px;max-width:86%}
+.chat .u{background:var(--em);color:#04170f;justify-self:end}.chat .a{background:#ffffff1c;border:1px solid #ffffff22}
+.ic{width:46px;height:46px;border-radius:15px;background:#22c55e24;display:grid;place-items:center;margin-bottom:16px;color:var(--green)}.ic svg{width:24px;height:24px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:48px;position:relative}
+.steps::before{content:"";position:absolute;left:8%;right:8%;top:27px;border-top:3px dotted #22c55e88}
+.st{position:relative}.st b{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--deep);color:#fff;font:700 22px Sora;margin-bottom:18px;box-shadow:0 0 0 8px var(--bg)}
+.st h3{font-size:22px;margin-bottom:6px}.st p{color:var(--muted)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.tier b{font:700 28px Sora}.tier ul{list-style:none;padding:0;margin-top:14px;display:grid;gap:8px;color:var(--muted)}.tier li::before{content:"✓ ";color:var(--em);font-weight:700}
+.tier.pop{background:var(--deep);color:#fff}.tier.pop ul{color:#cfe5d8}
+.cta{margin:20px 0 70px;border-radius:40px;padding:72px 28px;text-align:center;color:#fff;background:radial-gradient(circle at 80% 0,#22c55e55,transparent 50%),linear-gradient(150deg,#0f4a37,#08291f)}
+.cta h2{margin:0 auto 28px;max-width:14em}
+footer{padding:0 0 40px;color:var(--muted);font-size:14px}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding-top:36px}.links{display:none}.bento,.tiers,.steps{grid-template-columns:1fr}.bento>*{grid-column:auto!important}.steps::before{display:none}}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute"><defs>
-<symbol id="star" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 5.6 11.2 12 12-6.4.8-11.2 5.6-12 12-.8-6.4-5.6-11.2-12-12C6.4 11.2 11.2 6.4 12 0z" fill="currentColor"/></symbol>
-<symbol id="avo" viewBox="0 0 200 220">
-<path d="M100 8c10 14 12 26 10 38l-24 0c-6-14-2-26 14-38z" fill="#2f8f55"/>
-<ellipse cx="100" cy="190" rx="38" ry="8" fill="#22C55E" opacity=".18"/>
-<path d="M70 150c-6 28 14 44 30 44s20-18 12-40z" fill="#e9f0dc" stroke="#174D37" stroke-width="3"/>
-<path d="M140 150c18 4 24 22 10 36-8-14-16-22-26-26z" fill="#2f8f55" stroke="#174D37" stroke-width="3"/>
-<ellipse cx="38" cy="96" rx="20" ry="24" fill="#2f8f55" stroke="#174D37" stroke-width="3"/>
-<ellipse cx="162" cy="96" rx="20" ry="24" fill="#2f8f55" stroke="#174D37" stroke-width="3"/>
-<rect x="42" y="42" width="116" height="112" rx="52" fill="#F8F5EC" stroke="#174D37" stroke-width="3"/>
-<rect x="55" y="62" width="90" height="68" rx="32" fill="#092F24"/>
-<path d="M72 102q10-14 20 0M108 102q10-14 20 0" stroke="#7CF0A6" stroke-width="5" fill="none" stroke-linecap="round"/>
-<use href="#star" x="86" y="150" width="28" height="28" style="color:#22C55E"/>
-</symbol></defs></svg>
-
-<nav><div class="wrap">
-<a class="brand" href="#top" aria-label="Aveniq home"><svg width="30" height="30" style="color:var(--green)"><use href="#star"/></svg>Aveniq</a>
-<div class="links"><a href="#workspace">Product</a><a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a></div>
-<a class="btn fill sm" href="app.html">Get started</a>
-</div></nav>
-
+<nav><a class="brand" href="#top" aria-label="Aveniq home"><svg viewBox="0 0 24 24"><path d="M12 0c.8 6.4 5.6 11.2 12 12-6.4.8-11.2 5.6-12 12-.8-6.4-5.6-11.2-12-12C6.4 11.2 11.2 6.4 12 0z" fill="currentColor"/></svg>Aveniq</a>
+<div class="links"><a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a></div>
+<a class="btn" href="app.html">Get started</a></nav>
 <main id="top">
 <div class="wrap hero">
-<div>
-<span class="pill"><i></i>Aveniq Flow</span>
-<h1>Your AI <br>Business <b>Assistant.</b></h1>
-<p class="lede">Bring your tasks, appointments, customers, and favorite apps together. Let Avo help you run your business from one intelligent workspace.</p>
-<div class="row"><a class="btn fill" href="app.html">Get started</a><a class="btn" href="#workspace">Explore the workspace</a></div>
+<div><span class="badge"><i></i>Aveniq Flow</span>
+<h1>Your AI Business <em>Assistant.</em></h1>
+<p class="lede">Bring your tasks, appointments, customers, and favorite apps together. Let Avo help you manage your business from one connected workspace.</p>
+<div class="row"><a class="btn" href="app.html">Get started</a><a class="btn o" href="#features">Explore features</a></div></div>
+<div id="hero"></div>
 </div>
-<div class="avo-stage">
-<svg class="avo" viewBox="0 0 200 220" role="img" aria-label="Avo, the Aveniq mascot"><use href="#avo"/></svg>
-<div class="bubble">Let’s get things done!</div>
-</div>
-</div>
-
-<section id="workspace"><div class="wrap">
-<h2>Everything you use, fitted together.</h2>
-<p class="sub">Avo sits in the middle of your connected apps. Tap a piece to see what Avo can do with it, or disconnect it to watch the link break.</p>
-<div class="demo">
-<div class="demo-top"><strong class="brand" style="font-size:22px">Good morning!</strong><span class="tag">Demo mode · Greenfield Cleaning Services (sample data)</span></div>
-<div class="puzzle" id="puzzle">
-<div class="col l">
-<button class="piece" data-k="gmail"><i class="dot"></i><strong>Gmail</strong><small>2 new sample emails</small></button>
-<button class="piece" data-k="notion"><i class="dot"></i><strong>Notion</strong><small>Business notes</small></button>
-<button class="piece" data-k="tasks"><i class="dot"></i><strong>Tasks</strong><small>5 pending</small></button>
-</div>
-<div class="center"><svg viewBox="0 0 200 220" role="img" aria-label="Avo"><use href="#avo"/></svg></div>
-<div class="col r">
-<button class="piece" data-k="cal"><i class="dot"></i><strong>Google Calendar</strong><small>3 upcoming appointments</small></button>
-<button class="piece" data-k="slack"><i class="dot"></i><strong>Slack</strong><small>Team conversations</small></button>
-<button class="piece" data-k="cust"><i class="dot"></i><strong>Customers</strong><small>248 sample customers</small></button>
-</div>
-</div>
-<div class="panel" aria-live="polite"><p id="ptext"></p><button class="btn sm" id="ptoggle"></button></div>
-</div>
-<p class="note">Every connection needs your explicit permission. You can review it, disconnect it, or revoke access at any time.</p>
-</div></section>
 
 <section id="features"><div class="wrap">
-<h2>A practical assistant, not another chatbot.</h2>
-<div class="grid3">
-<div class="card"><h3>Everything connected</h3><p>Gmail, Calendar, Drive, Notion, and Slack in one workspace, so nothing hides in another tab.</p></div>
-<div class="card"><h3>Work smarter with AI</h3><p>Ask Avo to sort your inbox, plan your day, draft a reply, or set a follow-up. It tells you what it did.</p></div>
-<div class="card"><h3>Less manual work</h3><p>Automations turn a new customer inquiry into a task, and a booked appointment into a reminder.</p></div>
-</div>
-<div class="grid3">
-<div class="card"><h3>Tasks and calendar</h3><p>Priorities, deadlines, and conflicts in one view.</p></div>
-<div class="card"><h3>Customer records</h3><p>Contacts, notes, and follow-ups tied to tasks and appointments.</p></div>
-<div class="card"><h3>You approve the actions</h3><p>Emails and other consequential changes wait for your confirmation.</p></div>
-</div>
-</div></section>
+<div class="k">Features</div><h2>Every piece of your business, snapped together.</h2>
+<div class="bento">
+<div class="tile t1"><div class="ic" style="background:#ffffff1c;color:#7cf0a6"><svg class="i" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Avo, your assistant</h3><p>Ask in plain language. Avo adds tasks, books appointments, drafts replies, and tells you what it did.</p>
+<div class="chat"><div class="u">Add task call John tomorrow 3pm</div><div class="a">Done. Added “Call John” for Tomorrow 3:00 PM.</div></div></div>
+<div class="tile t2"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M10 3h4v3a2 2 0 1 0 4 0h3v5h-3a2 2 0 1 0 0 4h3v6h-5v-3a2 2 0 1 0-4 0v3H5v-6h3a2 2 0 1 0 0-4H5V3z"/></svg></div><h3>Connected apps</h3><p>Gmail, Calendar, Notion, and Slack in one place. You approve every connection.</p></div>
+<div class="tile t3"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Smart tasks</h3><p>Priorities, deadlines, and follow-ups that don’t slip.</p></div>
+<div class="tile t4"><div class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Calendar</h3><p>Appointments and deadlines in a single view.</p></div>
+<div class="tile t5"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h3>Customers</h3><p>Contacts, notes, and reminders tied to your work.</p></div>
+<div class="tile t6"><div><h3>Automations</h3><p>Turn a new inquiry into a follow-up task. Turn a booking into a reminder. Review and switch each rule on or off.</p></div><a class="btn o" href="app.html">Try the demo</a></div>
+</div></div></section>
 
-<section id="how"><div class="wrap">
-<h2>Three steps to a calmer week.</h2>
-<ol class="steps" style="padding:0">
-<li>Connect your apps<span>Choose what Avo can see and do.</span></li>
-<li>Let Avo learn your business<span>Customers, schedule, and tasks come together.</span></li>
-<li>Manage and automate<span>Ask in plain language and review the results.</span></li>
-</ol>
-</div></section>
+<section id="how"><div class="wrap"><div class="k">How it works</div><h2>Three steps to a calmer week.</h2>
+<div class="steps"><div class="st"><b>1</b><h3>Connect your apps</h3><p>Choose what Avo can see and do.</p></div><div class="st"><b>2</b><h3>Let Avo learn your business</h3><p>Customers, schedule, and tasks come together.</p></div><div class="st"><b>3</b><h3>Manage and automate</h3><p>Ask in plain language and review the results.</p></div></div></div></section>
 
-<section id="pricing"><div class="wrap tiers">
-<h2>Simple plans, set with real customers.</h2>
-<p class="sub">Final pricing comes after early-access pilots. These are the proposed tiers.</p>
-<div class="grid3">
-<div class="card"><b>Free</b><ul><li>Basic workspace</li><li>Limited AI usage</li><li>Basic tasks</li></ul></div>
-<div class="card"><b>Pro</b><ul><li>More AI usage</li><li>More integrations</li><li>Advanced automations</li></ul></div>
-<div class="card"><b>Team</b><ul><li>Multiple users</li><li>Shared workspaces</li><li>Team permissions</li></ul></div>
-</div>
-</div></section>
+<section id="pricing"><div class="wrap"><div class="k">Pricing</div><h2>Simple plans, shaped with early customers.</h2>
+<p style="color:var(--muted);margin-top:12px">Final pricing comes after early-access pilots. These are the proposed tiers.</p>
+<div class="tiers"><div class="tile tier"><b>Free</b><ul><li>Basic workspace</li><li>Limited AI usage</li><li>Basic task management</li></ul></div>
+<div class="tile tier pop"><b>Pro</b><ul><li>More AI usage</li><li>More integrations</li><li>Advanced automations</li></ul></div>
+<div class="tile tier"><b>Team</b><ul><li>Multiple users</li><li>Shared workspaces</li><li>Team permissions</li></ul></div></div></div></section>
 
-<div class="wrap" id="start"><div class="cta">
-<h2>Your business deserves a smarter way to work.</h2>
-<a class="btn fill" href="app.html">Get started with Aveniq Flow</a>
-</div></div>
+<div class="wrap"><div class="cta"><h2>Your business deserves a smarter way to work.</h2><a class="btn em" href="app.html">Get started with Aveniq Flow</a></div></div>
 </main>
 <footer><div class="wrap"><span>© Aveniq</span><span>Your business. In control.</span></div></footer>
-
+<script src="puzzle.js"></script>
 <script>
-const D={
-gmail:["Avo finds important emails, summarizes threads, and drafts replies for you to approve.","Gmail"],
-cal:["Avo reads your appointments, spots conflicts, and adds events once you confirm.","Calendar"],
-notion:["Avo pulls approved notes and creates pages to keep business knowledge organized.","Notion"],
-slack:["Avo summarizes permitted conversations and flags what needs you.","Slack"],
-tasks:["Create tasks by asking: “Follow up with John tomorrow.” Avo saves it and confirms.","Tasks"],
-cust:["Profiles, notes, and follow-up reminders linked to tasks and appointments.","Customers"]};
-let cur="gmail";const on={};
-const ps=[...document.querySelectorAll('.piece')];
-function draw(){
- ps.forEach(p=>{p.classList.toggle('sel',p.dataset.k===cur);p.classList.toggle('off',on[p.dataset.k]===false)});
- const connected=on[cur]!==false;
- document.getElementById('ptext').textContent=connected?D[cur][1]+": "+D[cur][0]:D[cur][1]+" is disconnected. Avo can no longer see it until you reconnect.";
- document.getElementById('ptoggle').textContent=connected?"Disconnect":"Reconnect";
-}
-ps.forEach(p=>p.addEventListener('click',()=>{cur=p.dataset.k;draw()}));
-document.getElementById('ptoggle').addEventListener('click',()=>{on[cur]=on[cur]===false;draw()});
-draw();
+document.getElementById('hero').innerHTML=Puzzle.render([
+{name:'Gmail',sub:'Summarize and draft',on:1,side:'l',row:0},{name:'Notion',sub:'Organize notes',on:1,side:'l',row:1},{name:'Tasks',sub:'Never miss a follow-up',on:1,side:'l',row:2},
+{name:'Calendar',sub:'Plan your schedule',on:1,side:'r',row:0},{name:'Slack',sub:'Team updates',on:1,side:'r',row:1},{name:'Customers',sub:'Keep in touch',on:1,side:'r',row:2}],
+{status:'Everything connected',hub:'one workspace'});
 </script>
 </body>
 </html>

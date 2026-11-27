@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aveniq Flow – Workspace (demo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F8F5EC;--surface:#fff;--ink:#102D23;--muted:#68776F;--deep:#092F24;--green:#174D37;--em:#22C55E;--line:#d9e2d6;--on-deep:#F8F5EC}
+@media (prefers-color-scheme:dark){:root{--bg:#07241b;--surface:#0f3326;--ink:#F8F5EC;--muted:#9fb3a8;--deep:#04170f;--line:#1d4a39;color-scheme:dark}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,sans-serif;display:flex;min-height:100vh}
+h1,h2,h3,.brand{font-family:'Bricolage Grotesque',Figtree,sans-serif;letter-spacing:-.02em;line-height:1.1}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--em);outline-offset:2px;border-radius:8px}
+aside{width:220px;background:var(--deep);color:var(--on-deep);padding:20px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.brand{font-weight:800;font-size:24px;display:flex;gap:8px;align-items:center;padding:0 8px 18px}
+.brand svg{color:var(--em)}
+aside button{background:none;border:0;color:inherit;text-align:left;padding:11px 14px;border-radius:14px;cursor:pointer;opacity:.8}
+aside button.on{background:#ffffff1f;opacity:1;font-weight:600}
+aside .demo{margin-top:auto;font-size:13px;opacity:.7;padding:8px}
+main{flex:1;padding:28px;max-width:980px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:34px;font-weight:800}
+.tag{font-size:13px;font-weight:600;background:color-mix(in srgb,var(--em) 18%,transparent);border-radius:99px;padding:4px 12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px}
+.puzzle{display:grid;grid-template-columns:1fr 150px 1fr;gap:12px;align-items:center}
+.col{display:grid;gap:12px}
+.piece{position:relative;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:14px 16px;cursor:pointer}
+.piece strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:17px}
+.piece small{color:var(--muted)}
+.piece::before{content:"";position:absolute;top:14px;right:14px;width:10px;height:10px;border-radius:50%;background:var(--em);box-shadow:0 0 0 4px color-mix(in srgb,var(--em) 25%,transparent)}
+.piece.off{border-style:dashed;opacity:.6}.piece.off::before{background:var(--muted);box-shadow:none}
+.avo{width:150px;animation:fl 5s ease-in-out infinite;cursor:pointer}
+@keyframes fl{50%{transform:translateY(-8px)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.stats b{font:800 28px 'Bricolage Grotesque',sans-serif;display:block}
+.stats span{color:var(--muted);font-size:14px}
+.row{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.row .g{flex:1;min-width:0}.row small{color:var(--muted);display:block}
+.row.done .t{text-decoration:line-through;opacity:.55}
+.btn{background:var(--deep);color:var(--on-deep);border:0;border-radius:99px;padding:10px 18px;cursor:pointer;font-weight:600}
+.btn.o{background:none;color:var(--ink);border:1.5px solid var(--line)}
+@media (prefers-color-scheme:dark){.btn:not(.o){background:var(--em);color:#04170f}}
+.add{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.add input,.add select{flex:1;min-width:120px;padding:10px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg)}
+.pri{font-size:12px;font-weight:600;border-radius:99px;padding:2px 10px;background:color-mix(in srgb,var(--em) 16%,transparent)}
+.pri.High{background:#f59e0b33}
+.sw{width:44px;height:26px;border-radius:99px;background:var(--line);border:0;position:relative;cursor:pointer;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.sw[aria-checked=true]{background:var(--em)}.sw[aria-checked=true]::after{left:21px}
+#chat{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 36px));background:var(--deep);color:var(--on-deep);border-radius:24px;box-shadow:0 20px 50px #0004;display:none;flex-direction:column;max-height:70vh;z-index:9}
+#chat.open{display:flex}
+#log{padding:16px;overflow:auto;display:grid;gap:8px;font-size:15px}
+#log div{background:#ffffff1a;padding:8px 12px;border-radius:14px;max-width:90%}
+#log .me{background:var(--em);color:#04170f;justify-self:end}
+#chat form{display:flex;gap:6px;padding:10px;border-top:1px solid #ffffff22}
+#chat input{flex:1;border-radius:99px;border:0;padding:10px 14px;background:#F8F5EC;color:#102D23}
+#fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));border:0;background:var(--deep);border-radius:99px;padding:6px 18px 6px 8px;display:flex;align-items:center;gap:8px;color:var(--on-deep);cursor:pointer;box-shadow:0 10px 30px #0003;font-weight:500}
+#fab svg{width:40px;height:44px}
+#chat.open~#fab{display:none}
+@media (max-width:760px){body{flex-direction:column}aside{width:100%;height:auto;position:sticky;flex-direction:row;overflow-x:auto;padding:10px;z-index:4}.brand,.demo{display:none}aside button{white-space:nowrap}main{padding:18px}.puzzle{grid-template-columns:1fr}.avo{margin:auto}.stats{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 0c.8 6.4 5.6 11.2 12 12-6.4.8-11.2 5.6-12 12-.8-6.4-5.6-11.2-12-12C6.4 11.2 11.2 6.4 12 0z" fill="currentColor"/></symbol>
+<symbol id="avo" viewBox="0 0 200 220">
+<path d="M100 8c10 14 12 26 10 38l-24 0c-6-14-2-26 14-38z" fill="#2f8f55"/>
+<path d="M70 150c-6 28 14 44 30 44s20-18 12-40z" fill="#e9f0dc" stroke="#174D37" stroke-width="3"/>
+<path d="M140 150c18 4 24 22 10 36-8-14-16-22-26-26z" fill="#2f8f55" stroke="#174D37" stroke-width="3"/>
+<ellipse cx="38" cy="96" rx="20" ry="24" fill="#2f8f55" stroke="#174D37" stroke-width="3"/>
+<ellipse cx="162" cy="96" rx="20" ry="24" fill="#2f8f55" stroke="#174D37" stroke-width="3"/>
+<rect x="42" y="42" width="116" height="112" rx="52" fill="#F8F5EC" stroke="#174D37" stroke-width="3"/>
+<rect x="55" y="62" width="90" height="68" rx="32" fill="#092F24"/>
+<path d="M72 102q10-14 20 0M108 102q10-14 20 0" stroke="#7CF0A6" stroke-width="5" fill="none" stroke-linecap="round"/>
+<use href="#star" x="86" y="150" width="28" height="28" style="color:#22C55E"/>
+</symbol></defs></svg>
+
+<aside id="nav">
+<div class="brand"><svg width="26" height="26"><use href="#star"/></svg>Aveniq</div>
+<button data-v="home" class="on">Home</button><button data-v="tasks">Tasks</button><button data-v="cal">Calendar</button><button data-v="cust">Customers</button><button data-v="auto">Automations</button><button data-v="int">Integrations</button><button data-v="set">Settings</button>
+<div class="demo">Demo mode. All data is fictional sample data.</div>
+</aside>
+<main><div class="top"><h1 id="h"></h1><span class="tag">Demo · Greenfield Cleaning Services</span></div><div id="v"></div></main>
+
+<section id="chat" aria-label="Avo assistant"><div id="log" aria-live="polite"></div>
+<form id="cf"><input id="ci" placeholder="Ask Avo…" aria-label="Message Avo"><button class="btn">Send</button></form></section>
+<button id="fab"><svg viewBox="0 0 200 220"><use href="#avo"/></svg>Ask Avo</button>
+
+<script>
+const $=s=>document.querySelector(s);
+const S={
+ tasks:[{t:"Follow up with Maria Lopez",p:"High",d:"Today",x:0},{t:"Send quote to Oakridge Dental",p:"High",d:"Tomorrow",x:0},{t:"Confirm Friday crew schedule",p:"Medium",d:"Friday",x:0},{t:"Reorder cleaning supplies",p:"Low",d:"Next week",x:0},{t:"Review new inquiry from J. Park",p:"Medium",d:"Today",x:0}],
+ appts:[["Walkthrough · Oakridge Dental","Today, 11:00 AM"],["Deep clean · Hartley Home","Tomorrow, 9:00 AM"],["Estimate · Birch Street Office","Friday, 2:00 PM"]],
+ cust:[["Maria Lopez","Residential","Follow-up due today"],["Oakridge Dental","Commercial","Quote pending"],["Hartley Home","Residential","Recurring biweekly"],["Birch Street Office","Commercial","Estimate Friday"],["J. Park","Residential","New inquiry"]],
+ auto:[["New customer inquiry → create follow-up task",1],["Appointment scheduled → prepare reminder",1],["Email needs reply → create draft",0]],
+ apps:{Gmail:"2 new sample emails","Google Calendar":"3 upcoming appointments",Notion:"Business notes",Slack:"Team conversations"},
+ on:{Gmail:1,"Google Calendar":1,Notion:1,Slack:1},log:["Created task from the dashboard"]
+};
+const T={home:"Good morning!",tasks:"Tasks",cal:"Calendar",cust:"Customers",auto:"Automations",int:"Integrations",set:"Settings"};
+let view="home";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function open(n){return S.tasks.filter(t=>!t.x).length}
+function render(){
+ $('#h').textContent=T[view];
+ document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===view));
+ const v=$('#v');
+ if(view==="home"){
+  const pc=(k,sub)=>`<button class="piece ${S.on[k]===0?'off':''}" data-go="int"><strong>${k}</strong><small>${S.on[k]===0?'Disconnected':sub}</small></button>`;
+  v.innerHTML=`<div class="card"><div class="puzzle"><div class="col">${pc('Gmail',S.apps.Gmail)}${pc('Notion',S.apps.Notion)}</div>
+  <svg class="avo" id="av" viewBox="0 0 200 220" role="button" aria-label="Open Avo"><use href="#avo"/></svg>
+  <div class="col">${pc('Google Calendar',S.apps['Google Calendar'])}${pc('Slack',S.apps.Slack)}</div></div></div>
+  <div class="stats"><div class="card"><b>${open()}</b><span>Open tasks</span></div><div class="card"><b>${S.appts.length}</b><span>Appointments</span></div><div class="card"><b>248</b><span>Sample customers</span></div><div class="card"><b>${S.auto.filter(a=>a[1]).length}</b><span>Active automations</span></div></div>`;
+  $('#av').onclick=()=>chat(true);
+ }else if(view==="tasks"){
+  v.innerHTML=`<form class="add" id="tf"><input id="tt" placeholder="New task" aria-label="Task title" required><select id="tp" aria-label="Priority"><option>High</option><option selected>Medium</option><option>Low</option></select><button class="btn">Add task</button></form><div class="card">${S.tasks.map((t,i)=>`<div class="row ${t.x?'done':''}"><input type="checkbox" data-i="${i}" ${t.x?'checked':''} aria-label="Complete"><div class="g"><span class="t">${esc(t.t)}</span><small>Due ${esc(t.d)}</small></div><span class="pri ${t.p}">${t.p}</span></div>`).join('')||'Nothing here yet. Add your first task above.'}</div>`;
+  $('#tf').onsubmit=e=>{e.preventDefault();addTask($('#tt').value,$('#tp').value);render()};
+  v.querySelectorAll('[data-i]').forEach(c=>c.onchange=()=>{S.tasks[c.dataset.i].x=c.checked?1:0;render()});
+ }else if(view==="cal"){
+  v.innerHTML=`<div class="card">${S.appts.map(a=>`<div class="row"><div class="g"><b>${esc(a[0])}</b><small>${a[1]}</small></div></div>`).join('')}</div><p style="color:var(--muted);margin-top:12px">No scheduling conflicts found.</p>`;
+ }else if(view==="cust"){
+  v.innerHTML=`<div class="card">${S.cust.map(c=>`<div class="row"><div class="g"><b>${c[0]}</b><small>${c[1]}</small></div><span>${c[2]}</span></div>`).join('')}</div><p style="color:var(--muted);margin-top:12px">Showing 5 of 248 sample customers.</p>`;
+ }else if(view==="auto"){
+  v.innerHTML=`<div class="card">${S.auto.map((a,i)=>`<div class="row"><div class="g">${a[0]}</div><button class="sw" role="switch" aria-checked="${!!a[1]}" aria-label="Toggle automation" data-a="${i}"></button></div>`).join('')}</div><h3 style="margin:22px 0 8px">Recent runs</h3><div class="card">${S.log.map(l=>`<div class="row">${esc(l)}</div>`).join('')}</div>`;
+  v.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const a=S.auto[b.dataset.a];a[1]=a[1]?0:1;S.log.unshift((a[1]?'Enabled: ':'Disabled: ')+a[0]);render()});
+ }else if(view==="int"){
+  v.innerHTML=`<div class="card">${Object.keys(S.apps).map(k=>`<div class="row"><div class="g"><b>${k}</b><small>${S.on[k]?'Connected · read and draft, you approve sending':'Disconnected'}</small></div><button class="btn o" data-k="${k}">${S.on[k]?'Disconnect':'Connect'}</button></div>`).join('')}</div><p style="color:var(--muted);margin-top:12px">Demo only: real Google sign-in comes with the live version.</p>`;
+  v.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{S.on[b.dataset.k]=S.on[b.dataset.k]?0:1;render()});
+ }else{
+  v.innerHTML=`<div class="card"><div class="row"><div class="g"><b>Avo asks before acting</b><small>Emails and other big changes need your OK</small></div><button class="sw" role="switch" aria-checked="true" aria-label="Confirm actions"></button></div><div class="row"><div class="g"><b>Remember business context</b><small>Lets Avo remember customers and preferences</small></div><button class="sw" role="switch" aria-checked="true" aria-label="Remember context"></button></div></div>`;
+  v.querySelectorAll('.sw').forEach(b=>b.onclick=()=>b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true'));
+ }
+}
+function addTask(t,p,d){if(!t.trim())return;S.tasks.unshift({t:t.trim(),p:p||"Medium",d:d||"Unscheduled",x:0});S.log.unshift("Created task: "+t.trim())}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;render()});
+$('#v').addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){view=g.dataset.go;render()}});
+
+function say(t,me){const d=document.createElement('div');d.textContent=t;if(me)d.className='me';$('#log').append(d);$('#log').scrollTop=1e9}
+function chat(o){$('#chat').classList.toggle('open',o);if(o){$('#ci').focus();if(!$('#log').children.length)say("Hi! I’m Avo. Try “plan my day”, “create a task to follow up with John tomorrow”, or “show my tasks”.")}}
+$('#fab').onclick=()=>chat(true);
+$('#cf').onsubmit=e=>{e.preventDefault();const q=$('#ci').value.trim();if(!q)return;$('#ci').value='';say(q,1);
+ const l=q.toLowerCase();let r;
+ let m=q.match(/(?:create|add|make)(?: a)? task(?: to)? (.+)/i);
+ if(m){let d="Unscheduled",t=m[1].replace(/\s+(today|tomorrow)$/i,(x,y)=>{d=y[0].toUpperCase()+y.slice(1);return''});addTask(t,"Medium",d);r=`Done. I added “${t}” (due ${d}). Anything else?`;if(view==="tasks"||view==="home")render()}
+ else if(/plan|day|schedule/.test(l)) r=`Today: ${S.appts[0][0]} at 11:00 AM, and ${S.tasks.filter(t=>!t.x&&t.d==="Today").length} tasks due. Start with the Maria Lopez follow-up.`;
+ else if(/task/.test(l)) r=`You have ${open()} open tasks. Top one: ${(S.tasks.find(t=>!t.x)||{t:'none'}).t}.`;
+ else if(/email|mail/.test(l)) r="You have 2 sample emails. I can draft replies, and you approve before anything sends.";
+ else r="In this demo I can plan your day, list tasks, and create tasks. The live version connects to your real apps.";
+ setTimeout(()=>say(r),350)};
+render();
+</script>
+</body>
+</html>
